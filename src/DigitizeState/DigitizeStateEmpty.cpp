@@ -64,6 +64,11 @@ void DigitizeStateEmpty::handleCurveChange(CmdMediator * /* cmdMediator */)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleCurveChange";
 }
 
+void DigitizeStateEmpty::handleFileImportSortedPoints(CmdMediator * /* cmdMediator */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateEmpty::handleFileImportSortedPoints";
+}
+
 void DigitizeStateEmpty::handleKeyPress (CmdMediator * /* cmdMediator */,
                                          Qt::Key key,
                                          bool /* atLeastOneSelectedItem */)
@@ -88,6 +93,11 @@ void DigitizeStateEmpty::handleMouseRelease (CmdMediator * /* cmdMediator */,
                                              QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseRelease";
+}
+
+bool DigitizeStateEmpty::isEnableImportSortedPoints() const
+{
+  return false;
 }
 
 QString DigitizeStateEmpty::state() const

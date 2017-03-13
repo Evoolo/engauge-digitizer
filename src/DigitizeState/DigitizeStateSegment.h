@@ -33,6 +33,7 @@ public:
   virtual void handleContextMenuEventGraph (CmdMediator *cmdMediator,
                                             const QStringList &pointIdentifiers);
   virtual void handleCurveChange(CmdMediator *cmdMediator);
+  virtual void handleFileImportSortedPoints (CmdMediator *cmdMediator);
   virtual void handleKeyPress (CmdMediator *cmdMediator,
                                Qt::Key key,
                                bool atLeastOneSelectedItem);
@@ -42,6 +43,7 @@ public:
                                  QPointF posScreen);
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF posScreen);
+  virtual bool isEnableImportSortedPoints () const;
   virtual QString state() const;
   virtual void updateAfterPointAddition ();
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,

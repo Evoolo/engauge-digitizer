@@ -239,6 +239,11 @@ void DigitizeStateColorPicker::handleCurveChange(CmdMediator * /* cmdMediator */
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleCurveChange";
 }
 
+void DigitizeStateColorPicker::handleFileImportSortedPoints(CmdMediator * /* cmdMediator */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateColorPicker::handleFileImportSortedPoints";
+}
+
 void DigitizeStateColorPicker::handleKeyPress (CmdMediator * /* cmdMediator */,
                                                Qt::Key key,
                                                bool /* atLeastOneSelectedItem */)
@@ -282,6 +287,11 @@ void DigitizeStateColorPicker::handleMouseRelease (CmdMediator *cmdMediator,
     context().appendNewCmd(cmdMediator,
                            cmd);
   }
+}
+
+bool DigitizeStateColorPicker::isEnableImportSortedPoints() const
+{
+  return false;
 }
 
 void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilter &modelColorFilterAfter,

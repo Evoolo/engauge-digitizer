@@ -98,6 +98,11 @@ void DigitizeStateAxis::handleCurveChange(CmdMediator * /* cmdMediator */)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleCurveChange";
 }
 
+void DigitizeStateAxis::handleFileImportSortedPoints(CmdMediator * /* cmdMediator */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateAxis::handleFileImportSortedPoints";
+}
+
 void DigitizeStateAxis::handleKeyPress (CmdMediator * /* cmdMediator */,
                                         Qt::Key key,
                                         bool /* atLeastOneSelectedItem */)
@@ -185,6 +190,11 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
       }
     }
   }
+}
+
+bool DigitizeStateAxis::isEnableImportSortedPoints() const
+{
+  return false;
 }
 
 QString DigitizeStateAxis::state() const

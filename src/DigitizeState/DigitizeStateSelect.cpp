@@ -295,6 +295,11 @@ void DigitizeStateSelect::handleCurveChange(CmdMediator * /* cmdMediator */)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleCurveChange";
 }
 
+void DigitizeStateSelect::handleFileImportSortedPoints(CmdMediator * /* cmdMediator */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateSelect::handleFileImportSortedPoints";
+}
+
 void DigitizeStateSelect::handleKeyPress (CmdMediator *cmdMediator,
                                           Qt::Key key,
                                           bool atLeastOneSelectedItem)
@@ -365,6 +370,11 @@ void DigitizeStateSelect::handleMouseRelease (CmdMediator *cmdMediator,
     context().mainWindow().updateAfterMouseRelease();
 
   }
+}
+
+bool DigitizeStateSelect::isEnableImportSortedPoints() const
+{
+  return false;
 }
 
 void DigitizeStateSelect::keyPressArrow (CmdMediator *cmdMediator,

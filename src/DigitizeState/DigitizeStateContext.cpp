@@ -109,6 +109,11 @@ void DigitizeStateContext::handleCurveChange (CmdMediator *cmdMediator)
   m_states [m_currentState]->handleCurveChange(cmdMediator);
 }
 
+void DigitizeStateContext::handleFileImportSortedPoints(CmdMediator *cmdMediator)
+{
+  m_states [m_currentState]->handleFileImportSortedPoints(cmdMediator);
+}
+
 void DigitizeStateContext::handleKeyPress (CmdMediator *cmdMediator,
                                            Qt::Key key,
                                            bool atLeastOneSelectedItem)
@@ -148,6 +153,11 @@ void DigitizeStateContext::handleMouseRelease (CmdMediator *cmdMediator,
                                                  pos);
 
   completeRequestedStateTransitionIfExists(cmdMediator);
+}
+
+bool DigitizeStateContext::isEnableImportSortedPoints() const
+{
+  return m_states [m_currentState]->isEnableImportSortedPoints();
 }
 
 bool DigitizeStateContext::isGnuplot () const

@@ -262,6 +262,7 @@ private slots:
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
   void slotFileImportImageReplace();
+  void slotFileImportSortedPoints();
   void slotFileOpen();
   void slotFileOpenDraggedDigFile (QString);
   void slotFilePrint();
@@ -454,6 +455,7 @@ private:
   QAction *m_actionImport;
   QAction *m_actionImportAdvanced;
   QAction *m_actionImportImageReplace;
+  QAction *m_actionImportSortedPoints;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
   QList<QAction*> m_actionRecentFiles;

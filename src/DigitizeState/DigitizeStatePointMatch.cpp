@@ -170,6 +170,37 @@ QList<PointMatchPixel> DigitizeStatePointMatch::extractSamplePointPixels (const 
   return samplePointPixels;
 }
 
+void DigitizeStatePointMatch::findPointsAndShowFirstCandidate (CmdMediator *cmdMediator,
+                                                               const QPointF &posScreen)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::findPointsAndShowFirstCandidate";
+
+  const DocumentModelPointMatch &modelPointMatch = cmdMediator->document().modelPointMatch();
+  const QImage &img = context().mainWindow().imageFiltered();
+
+  QList<PointMatchPixel> samplePointPixels = extractSamplePointPixels (img,
+                                                                       modelPointMatch,
+                                                                       posScreen);
+
+  QString curveName = activeCurve();
+  const Document &doc = cmdMediator->document();
+  const Curve *curve = doc.curveForCurveName (curveName);
+
+  // The point match algorithm takes a few seconds, so set the cursor so user knows we are processing
+  QApplication::setOverrideCursor(Qt::WaitCursor);
+
+  PointMatchAlgorithm pointMatchAlgorithm (context().isGnuplot());
+  m_candidatePoints = pointMatchAlgorithm.findPoints (samplePointPixels,
+                                                      img,
+                                                      modelPointMatch,
+                                                      curve->points());
+
+  QApplication::restoreOverrideCursor(); // Heavy duty processing has finished
+  context().mainWindow().showTemporaryMessage ("Right arrow adds next matched point");
+
+  popCandidatePoint (cmdMediator);
+}
+
 void DigitizeStatePointMatch::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
                                                           const QString &pointIdentifier)
 {
@@ -187,6 +218,11 @@ void DigitizeStatePointMatch::handleContextMenuEventGraph (CmdMediator * /* cmdM
 void DigitizeStatePointMatch::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleCurveChange";
+}
+
+void DigitizeStatePointMatch::handleFileImportSortedPoints(CmdMediator * /* cmdMediator */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStatePointMatch::handleFileImportSortedPoints";
 }
 
 void DigitizeStatePointMatch::handleKeyPress (CmdMediator *cmdMediator,
@@ -251,35 +287,9 @@ void DigitizeStatePointMatch::handleMouseRelease (CmdMediator *cmdMediator,
                                    posScreen);
 }
 
-void DigitizeStatePointMatch::findPointsAndShowFirstCandidate (CmdMediator *cmdMediator,
-                                                               const QPointF &posScreen)
+bool DigitizeStatePointMatch::isEnableImportSortedPoints() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::findPointsAndShowFirstCandidate";
-
-  const DocumentModelPointMatch &modelPointMatch = cmdMediator->document().modelPointMatch();
-  const QImage &img = context().mainWindow().imageFiltered();
-
-  QList<PointMatchPixel> samplePointPixels = extractSamplePointPixels (img,
-                                                                       modelPointMatch,
-                                                                       posScreen);
-
-  QString curveName = activeCurve();
-  const Document &doc = cmdMediator->document();
-  const Curve *curve = doc.curveForCurveName (curveName);
-
-  // The point match algorithm takes a few seconds, so set the cursor so user knows we are processing
-  QApplication::setOverrideCursor(Qt::WaitCursor);
-
-  PointMatchAlgorithm pointMatchAlgorithm (context().isGnuplot());
-  m_candidatePoints = pointMatchAlgorithm.findPoints (samplePointPixels,
-                                                      img,
-                                                      modelPointMatch,
-                                                      curve->points());
-
-  QApplication::restoreOverrideCursor(); // Heavy duty processing has finished
-  context().mainWindow().showTemporaryMessage ("Right arrow adds next matched point");
-
-  popCandidatePoint (cmdMediator);
+  return false;
 }
 
 bool DigitizeStatePointMatch::pixelIsOnInImage (const QImage &img,

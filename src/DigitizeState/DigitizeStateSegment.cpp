@@ -106,6 +106,11 @@ void DigitizeStateSegment::handleCurveChange(CmdMediator *cmdMediator)
   }
 }
 
+void DigitizeStateSegment::handleFileImportSortedPoints(CmdMediator * /* cmdMediator */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateSegment::handleFileImportSortedPoints";
+}
+
 void DigitizeStateSegment::handleKeyPress (CmdMediator * /* cmdMediator */,
                                            Qt::Key key,
                                            bool /* atLeastOneSelectedItem */)
@@ -130,6 +135,11 @@ void DigitizeStateSegment::handleMouseRelease (CmdMediator * /* cmdMediator */,
                                                QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleMouseRelease";
+}
+
+bool DigitizeStateSegment::isEnableImportSortedPoints() const
+{
+  return false;
 }
 
 Segment *DigitizeStateSegment::segmentFromSegmentStart (const QPointF &posSegmentStart) const

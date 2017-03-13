@@ -85,6 +85,11 @@ void DigitizeStateScale::handleCurveChange(CmdMediator * /* cmdMediator */)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleCurveChange";
 }
 
+void DigitizeStateScale::handleFileImportSortedPoints(CmdMediator * /* cmdMediator */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateScale::handleFileImportSortedPoints";
+}
+
 void DigitizeStateScale::handleKeyPress (CmdMediator * /* cmdMediator */,
                                          Qt::Key key,
                                          bool /* atLeastOneSelectedItem */)
@@ -205,6 +210,11 @@ void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
                              cmd);
     }
   }
+}
+
+bool DigitizeStateScale::isEnableImportSortedPoints() const
+{
+  return false;
 }
 
 void DigitizeStateScale::removeTemporaryPointsAndLine ()

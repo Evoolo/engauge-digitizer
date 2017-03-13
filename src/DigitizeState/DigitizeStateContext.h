@@ -51,6 +51,9 @@ public:
   /// See DigitizeStateAbstractBase::handleCurveChange.
   void handleCurveChange (CmdMediator *cmdMediator);
 
+  /// See DigitizeStateAbstractBase::handleFileImportSortedPoints
+  void handleFileImportSortedPoints (CmdMediator *cmdMediator);
+
   /// See DigitizeStateAbstractBase::handleKeyPress.
   void handleKeyPress (CmdMediator *cmdMediator,
                        Qt::Key key,
@@ -67,6 +70,9 @@ public:
   /// See DigitizeStateAbstractBase::handleMouseRelease.
   void handleMouseRelease (CmdMediator *cmdMediator,
                            QPointF pos);
+
+  /// See DigitizeStateAbstractBase::isEnableImportSortedPoints
+  bool isEnableImportSortedPoints () const;
 
   /// Get method for gnuplot flag
   bool isGnuplot () const;

@@ -67,6 +67,9 @@ public:
   /// Handle the selection of a new curve. At a minimum, DigitizeStateSegment will generate a new set of Segments
   virtual void handleCurveChange (CmdMediator *cmdMediator) = 0;
 
+  /// Handle the user command to import sorted points. Used after isEnableImportSortedPoints indicates operation is valid
+  virtual void handleFileImportSortedPoints (CmdMediator *cmdMediator) = 0;
+
   /// Handle a key press that was intercepted earlier.
   virtual void handleKeyPress (CmdMediator *cmdMediator,
                                Qt::Key key,
@@ -83,6 +86,9 @@ public:
   /// Handle a mouse release that was intercepted earlier.
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF pos) = 0;
+
+  /// Return true if state supports import of sorted points. Indicates if call to handleFileImportSortedPoints is valid
+  virtual bool isEnableImportSortedPoints () const = 0;
 
   /// Update the cursor according to the current state.
   void setCursor(CmdMediator *cmdMediator);
