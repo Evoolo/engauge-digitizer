@@ -114,7 +114,7 @@ def main ():
 
     # Input parameters in pixels
     minRadius = 10
-    maxRadius = 30 # 80
+    maxRadius = 50 # 80
     localMaximaSearchRadius = 5
     maxPeakCount = 200
     
